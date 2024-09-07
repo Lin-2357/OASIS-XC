@@ -6,6 +6,7 @@ import time
 
 regged = {"id": 1243, "name": 'Registered Student Organizations'}
 fro = {"id": 4595, "name": "FROZEN GROUP PENDING COMPLETION OF REGISTRATION STEPS"}
+initials= 'JL'
 
 def patch(_id, prev, cur):
     reg = cur == 'Registered Student Organizations'
@@ -17,18 +18,16 @@ def patch(_id, prev, cur):
     body = [{"op": "replace", "path": "/organizationType", "value": regged if reg else fro}]
     request(str(_id), 'PATCH', body=body)
     date = "/".join(str(datetime.today()).split(" ")[0].split("-")[1:])
-    strout = "\n" + date + " Moved from "+ prev +" to " + cur + "upon " + ("failing to complete" if reg else "completing") + " registration requirement - JL"
+    strout = "\n" + date + " Moved from "+ prev +" to " + cur + "upon " + ("failing to complete" if not reg else "completing") + " registration requirement - "+initials
     note('https://callink.berkeley.edu/actioncenter/branch/associatedstudentsoftheuniversityofcalifornia/organizations/edit/'+str(_id), driver, strout)
     return True
 
-act = load("ActionItems.csv", 1, "Organization ID", ['XC Date', 'Organization ID', 'Org Name', 'Previous Status', 'Current Status', 'Comments', 'Date Completed'])
+act = load("mailXC.csv", 1, "Organization ID", ['XC Date', 'Organization ID', 'Org Name', 'Previous Status', 'Current Status', 'Comments', 'Date Completed'])
 
 for x in act:
     if patch(x, act[x]['Previous Status'][0], act[x]['Current Status'][0]):
         act[x]['Date Completed'] = ["_".join(str(datetime.today()).split(" ")[0].split("-")[1:])]
     time.sleep(0.1)
-    print('updated '+act[x]['Org Name'])
-
-export(act, 'ActionItems.csv', ['XC Date', 'Organization ID', 'Org Name', 'Previous Status', 'Current Status', 'Comments', 'Date Completed'])
+    print('updated '+act[x]['Org Name'][0])
 
 driver.close()

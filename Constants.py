@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pyperclip
 import pyautogui
+import time
 
 renamer = {"""48449656: 
 Enter the name of your first organization or ASUC/ GA Unit as it appears in CalLink.
@@ -126,9 +127,13 @@ def scrap(link, driver):
 def note(link, driver, text):
     driver.get(link)
     email = driver.find_elements(By.CSS_SELECTOR, "div.group-set")[2]
+    time.sleep(0.5)
     email.click()
-    pyperclip.copy(text)
-    pyautogui.hotkey('ctrl', 'v')
+    time.sleep(0.5)
+    pyautogui.press('down', 10)
+    pyautogui.press('right', 100)
+    pyautogui.write(text, 0.03)
+    time.sleep(1)
     submit = driver.find_element(By.CSS_SELECTOR, (".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored"))
     submit.click()
 

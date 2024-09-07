@@ -7,7 +7,7 @@ sig = load('inputFile/UsersBySystemPositionTemplate.csv', 3, "Organization ID", 
 out = {}
 
 for x in act:
-    if act[x]['Current Status'][0] != act[x]['Previous Status'][0]:
+    if act[x]['Current Status'][0] != act[x]['Previous Status'][0] and act[x]['Previous Status'][0] != 'Sponsored Student Organizations':
         y = sig[x]['Username'] if x in sig else []
         out[x] = {'Email': [','.join([emails[i]['Campus Email'][0] for i in y])], 'Organization Name': act[x]['Org Name']}
         for b in act[x]:
