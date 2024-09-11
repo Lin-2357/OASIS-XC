@@ -18,7 +18,7 @@ def patch(_id, prev, cur):
     body = [{"op": "replace", "path": "/organizationType", "value": regged if reg else fro}]
     request(str(_id), 'PATCH', body=body)
     date = "/".join(str(datetime.today()).split(" ")[0].split("-")[1:])
-    strout = "\n" + date + " Moved from "+ prev +" to " + cur + "upon " + ("failing to complete" if not reg else "completing") + " registration requirement - "+initials
+    strout = "\n" + date + " Moved from "+ prev +" to " + cur + " upon " + ("failing to complete" if not reg else "completing") + " registration requirement - "+initials
     note('https://callink.berkeley.edu/actioncenter/branch/associatedstudentsoftheuniversityofcalifornia/organizations/edit/'+str(_id), driver, strout)
     return True
 
