@@ -9,7 +9,7 @@ out = {}
 for x in act:
     if act[x]['Current Status'][0] != act[x]['Previous Status'][0] and act[x]['Previous Status'][0] != 'Sponsored Student Organizations':
         y = sig[x]['Username'] if x in sig else []
-        out[x] = {'Email': [','.join([emails[i]['Campus Email'][0] for i in y])], 'Organization Name': act[x]['Org Name']}
+        out[x] = {'Email': [','.join([(emails[i]['Campus Email'][0] if i in emails else i)for i in y])], 'Organization Name': act[x]['Org Name']}
         for b in act[x]:
             out[x][b] = act[x][b]
 

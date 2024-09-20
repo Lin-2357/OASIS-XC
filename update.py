@@ -23,11 +23,14 @@ def patch(_id, prev, cur):
     return True
 
 act = load("mailXC.csv", 1, "Organization ID", ['XC Date', 'Organization ID', 'Org Name', 'Previous Status', 'Current Status', 'Comments', 'Date Completed'])
+newraw = load('NewRaw.csv', 1, "Organization ID", ["Organization Name", "Completed Reg Req", 'Reg Form', 'Signatory', 'T&C', "Organization Type", "Callink URL", 'Callink Designation' ,"Primary Campus Advisor"])
 
 for x in act:
     if patch(x, act[x]['Previous Status'][0], act[x]['Current Status'][0]):
         act[x]['Date Completed'] = ["_".join(str(datetime.today()).split(" ")[0].split("-")[1:])]
     time.sleep(0.1)
     print('updated '+act[x]['Org Name'][0])
+    newraw[x]['Organization Type'] = act[x]['Current Status']
 
 driver.close()
+export(newraw, 'NewRaw.csv', ["Organization ID", "Organization Name", "Completed Reg Req", 'Reg Form', 'Signatory', 'T&C', "Organization Type", "Callink URL", 'Callink Designation' ,"Primary Campus Advisor"])
