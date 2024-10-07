@@ -135,8 +135,8 @@ def note(link, driver, text):
     pyautogui.keyUp('ctrl')
     pyautogui.press('right')
     pyautogui.write(text, 0.03)
-    time.sleep(1)
-    submit = driver.find_element(By.CSS_SELECTOR, (".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored"))
+    time.sleep(3)
+    submit = driver.find_element(By.CSS_SELECTOR, ("input.mdl-button"))
     submit.click()
 
 def sim(str1, str2):
