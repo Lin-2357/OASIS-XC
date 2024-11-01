@@ -9,9 +9,9 @@ last = load("inputFile/raw.csv", 1, 'Organization ID', ['T&C', 'Completed Reg Re
 for x in orgdir:
     orgdir[x]["Callink URL"] = ["https://callink.berkeley.edu/actioncenter/organization/" + orgdir[x]["Website Key"][0]]
     orgdir[x]["Signatory"] = [len(sig[x]['Username']) if x in sig else 0]
-    orgdir[x]['Completed Reg Req'] = ["Yes" if (x in regprog and regprog[x]["Status"][0] == "Approved" and (len(sig[x]['Username']) if x in sig else 0)>=4) else "No"]
+    orgdir[x]['Completed Reg Req'] = ["Yes" if (x in regprog and regprog[x]["Status"][0] == "Approved" and (len(sig[x]['Username']) if x in sig else 0)>=4) else "N/A" if "CalGreeks" in orgdir[x]["Organization Type"] else "No"]
     orgdir[x]['T&C'] = last[x]['T&C'] if x in last else ['In Progress']
-    orgdir[x]['Reg Form'] = regprog[x]['Status'] if x in regprog else ['Not Started']
+    orgdir[x]['Reg Form'] = regprog[x]['Status'] if x in regprog else ['N/A'] if "CalGreeks" in orgdir[x]["Organization Type"] else ['Not Started']
 
 export(orgdir, 'regsig.csv', ["Organization ID", "Organization Name", "Completed Reg Req", 'Reg Form', 'Signatory', 'T&C', "Organization Type", "Callink URL", 'Callink Designation' ,"Primary Campus Advisor"])
 
