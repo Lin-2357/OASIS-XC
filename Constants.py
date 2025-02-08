@@ -112,7 +112,7 @@ def export(js, path, cols):
             row = [x if i=='Organization ID' else js[x][i][0] for i in cols]
             fw.writerow(row)
 
-firefoxpath = 'C:/Users/linji/AppData/Roaming/Mozilla/Firefox/Profiles/j5utn2tf.default-release'
+firefoxpath = 'C:/Users/shura/AppData/Roaming/Mozilla/Firefox/Profiles/fssolpfd.default-release'
 options = webdriver.firefox.options.Options()
 options.add_argument("--profile={}".format(firefoxpath))
 

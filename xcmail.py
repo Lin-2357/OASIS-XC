@@ -1,6 +1,6 @@
 from Constants import load, export
 
-emails = load('inputFile/email_ref.csv', 24, 'Username', ['First Name', 'Last Name', 'Campus Email'])
+emails = load('inputFile/email_ref.csv', 23, 'Username', ['First Name', 'Last Name', 'Campus Email'])
 act = load("ActionItems.csv", 1, "Organization ID", ['XC Date', 'Organization ID', 'Org Name', 'Previous Status', 'Current Status', 'Comments', 'Date Completed'])
 sig = load('inputFile/UsersBySystemPositionTemplate.csv', 3, "Organization ID", ["Username"])
 
