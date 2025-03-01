@@ -6,7 +6,7 @@ import time
 
 regged = {"id": 1243, "name": 'Registered Student Organizations'}
 fro = {"id": 4595, "name": "FROZEN GROUP PENDING COMPLETION OF REGISTRATION STEPS"}
-initials= 'JL'
+initials= 'Script'
 
 def patch(_id, prev, cur):
     reg = cur == 'Registered Student Organizations'
